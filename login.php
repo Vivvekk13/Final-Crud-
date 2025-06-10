@@ -6,8 +6,6 @@ include ("connection.php");
 
 
 
-
-
 function clean_inputs($field)
 {
   $field = trim($field);
@@ -53,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  }
 
   }
-?>
+?> 
 
 
 
