@@ -3,19 +3,19 @@
 
 include("connection.php");
 
- 
+
 session_start();
 $isAdmin = ($_SESSION['role'] ?? '') === 'admin';
 
 
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
-  $dlt = $conn->prepare("DELETE FROM `notes` WHERE `id` = ?");
+  $dlt = $conn->prepare("UPDATE `notes` SET `is_deleted` = 1 WHERE `id` = ?");
   $dlt->bind_param("i", $id);
   $dlt->execute();
   $dlt->close();
   
-  header("location:http://localhost/vivek/show.php?$id");
+  header("location:http://localhost/vivek/show.php?");
 }
 
 
@@ -34,6 +34,7 @@ if (isset($_GET['id']) && isset($_GET['status_'])) {
          
 }
 }
+
 
 
 // if (isset($_GET['id']) && isset($_GET['role'])) {
@@ -76,7 +77,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Valethi CRUD Operation</title>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -115,7 +116,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 </thead>
       <tbody>
 <?php
-$sql = "SELECT * FROM `notes` ORDER BY id DESC";
+$sql = "SELECT * FROM `notes` WHERE `is_deleted` = 0 ORDER BY id DESC";
 $result = mysqli_query($conn, $sql);
 
 while ($row = mysqli_fetch_assoc($result)) {
