@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 
 include("connection.php");
@@ -129,10 +129,10 @@ while ($row = mysqli_fetch_assoc($result)) {
         <td>{$row['address']}</td>
         <td>{$statusText}</td>
         <td>{$row['tstamp']}</td>";
-    
+
     if ($isAdmin) {
         echo "<td>
-            <a href='update.php?id={$row['id']}' class='btn btn-success btn-sm'>Edit</a>
+            <a href='update.php?id={$row['id']}' class='btn btn-success btn-sm'>Edit</a> 
             <a href='?delete={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Are you sure?');\">Delete</a>
         </td>";
     }
