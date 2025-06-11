@@ -8,6 +8,17 @@ include ("connection.php");
 
 
 
+function clean_inputs($field)
+{
+  $field = trim($field);
+  $field = stripslashes($field);
+  $field = htmlspecialchars($field);
+  return $field;
+}
+
+
+
+
 $id = $_GET['id'] ?? null;
 
 $stmt = $conn->prepare("SELECT * FROM notes WHERE id = ?");
@@ -22,15 +33,12 @@ $Name1=$Email1 = $mobile_number1 ="";
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-  $name=  $_POST['Name'];
-  $Email=  $_POST['Email'];
 
+  $name = clean_inputs($_POST["Name"]);
+  $Email = clean_inputs($_POST["Email"]);
+  $address = clean_inputs($_POST["address"]);
+  $mobile_number = clean_inputs($_POST["mobile_number"]);
  
-  $mobile_number=  $_POST['mobile_number'];
-
-
-  $address=  $_POST['address'];
-
 
   // $new_id = $_GET['id'] ;
 
