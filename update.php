@@ -77,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
    if($result){
     echo "<script> alert('record updated') </script>";
    
-  header("location:http://localhost/vivek/show.php?id={$row['id']}");
+  header("location:http://localhost/vivek/show.php?");
    
    }
 
